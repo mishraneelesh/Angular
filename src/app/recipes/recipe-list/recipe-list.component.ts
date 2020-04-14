@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , EventEmitter, Output} from '@angular/core';
 import {Recipe} from '../recipes.model'
 @Component({
   selector: 'app-recipe-list',
@@ -6,14 +6,18 @@ import {Recipe} from '../recipes.model'
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
+  @Output () recipewasselected= new EventEmitter<Recipe>();
 
   recipes: Recipe[] = [
-  new Recipe("New Recipe", "This is Test", "https://www.google.com/url?sa=i&source=imgres&cd=&cad=rja&uact=8&ved=2ahUKEwiIu_fA5dXoAhUlzjgGHSIzCi4QjRx6BAgBEAQ&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ARecipe_Unlimited_logo.png&psig=AOvVaw21oH0wDE39-MvyJRk_uLsy&ust=1586330969404742"),
-  new Recipe("New Recipe", "This is Test", "https://www.google.com/url?sa=i&source=imgres&cd=&cad=rja&uact=8&ved=2ahUKEwiIu_fA5dXoAhUlzjgGHSIzCi4QjRx6BAgBEAQ&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ARecipe_Unlimited_logo.png&psig=AOvVaw21oH0wDE39-MvyJRk_uLsy&ust=1586330969404742")
+  new Recipe("Recipe", "This is Test", "https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg"),
+  new Recipe("New Recipe", "This New Recipe", "https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg")
   ];
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onRecipeSelected(recipeSel: Recipe){
+  this.recipewasselected.emit(recipeSel);
+  }
 }
